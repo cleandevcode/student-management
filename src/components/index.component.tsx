@@ -4,11 +4,14 @@ import Person from "../models/person";
 import BaseService from "../service/base.service";
 import * as toastr from "toastr";
 import Loading from "../common/loading";
+import SortIcon from "../assets/sort-icon.png";
+
 interface IProps {}
 interface IState {
   listPersons: Array<Person>;
   isReady: Boolean;
   hasError: Boolean;
+  sorted: Boolean;
 }
 
 class Index extends React.Component<IProps, IState> {
@@ -16,6 +19,7 @@ class Index extends React.Component<IProps, IState> {
     listPersons: new Array<Person>(),
     isReady: false,
     hasError: false,
+    sorted: false,
   };
   constructor(props: IProps) {
     super(props);
@@ -23,7 +27,9 @@ class Index extends React.Component<IProps, IState> {
       isReady: false,
       listPersons: Array<Person>(),
       hasError: false,
+      sorted: false,
     };
+    this.onSorting = this.onSorting.bind(this);
   }
 
   public componentDidMount() {
@@ -108,7 +114,25 @@ class Index extends React.Component<IProps, IState> {
     });
   };
 
+  onSorting(keyword: string, sorted: Boolean) {
+    const { listPersons } = this.state;
+
+    switch (keyword) {
+      case keyword:
+        const result = listPersons.sort((a: any, b: any) => {
+          return sorted
+            ? a[keyword].localeCompare(b[keyword])
+            : b[keyword].localeCompare(a[keyword]);
+        });
+        this.setState({ ...this.state, listPersons: result, sorted: !sorted });
+        return;
+      default:
+        break;
+    }
+  }
+
   public render(): React.ReactNode {
+    const { sorted } = this.state;
     return (
       <div>
         <h3 className="text-center">Persons List</h3>
@@ -116,11 +140,41 @@ class Index extends React.Component<IProps, IState> {
           <thead>
             <tr>
               <th>Index</th>
-              <th>First Name</th>
-              <th>Last Name</th>
-              <th>Email</th>
-              <th>Mobile Number</th>
-              <th>Address</th>
+              <th
+                className="pointer"
+                onClick={() => this.onSorting("firstName", sorted)}
+              >
+                First Name
+                <img src={SortIcon} alt="First name" width={12} />
+              </th>
+              <th
+                className="pointer"
+                onClick={() => this.onSorting("lastName", sorted)}
+              >
+                Last Name
+                <img src={SortIcon} alt="First name" width={12} />
+              </th>
+              <th
+                className="pointer"
+                onClick={() => this.onSorting("email", sorted)}
+              >
+                Email
+                <img src={SortIcon} alt="First name" width={12} />
+              </th>
+              <th
+                className="pointer"
+                onClick={() => this.onSorting("mobileNumber", sorted)}
+              >
+                Mobile Number
+                <img src={SortIcon} alt="First name" width={12} />
+              </th>
+              <th
+                className="pointer"
+                onClick={() => this.onSorting("address", sorted)}
+              >
+                Address
+                <img src={SortIcon} alt="First name" width={12} />
+              </th>
 
               <th className="text-center" colSpan={2}>
                 Action
