@@ -17,9 +17,13 @@ class Home extends React.Component<IProps, IState> {
             alt=""
             width="72"
           />
-          <h1 className="display-5 fw-bold">Student Management</h1>
+          <h1 className="display-5 fw-bold">
+            Member Management / See results on Wikipedia
+          </h1>
           <div className="col-lg-6 mx-auto">
-            <p className="lead mb-4">React use Typescript CRUD simple app</p>
+            <p className="lead mb-4">
+              React & Typescript CRUD / Wikipedia Simple App
+            </p>
             <div className="d-grid gap-2 d-sm-flex justify-content-sm-center">
               <a
                 type="button"

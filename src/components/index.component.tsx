@@ -120,7 +120,7 @@ class Index extends React.Component<IProps, IState> {
               <th>Last Name</th>
               <th>Email</th>
               <th>Mobile Number</th>
-              <th>Adress</th>
+              <th>Address</th>
 
               <th className="text-center" colSpan={2}>
                 Action
