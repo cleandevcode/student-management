@@ -29,6 +29,8 @@ class Home extends React.Component<IProps, IState> {
                 type="button"
                 className="btn btn-primary btn-lg px-4 gap-3"
                 href="https://github.com/cleandevcode/student-management"
+                target="_blank"
+                rel="noreferrer"
               >
                 Go to Front-end repo
               </a>
@@ -36,6 +38,8 @@ class Home extends React.Component<IProps, IState> {
                 type="button"
                 className="btn btn-primary btn-lg px-4 gap-3"
                 href="https://github.com/cleandevcode/student-management-api"
+                target="_blank"
+                rel="noreferrer"
               >
                 Go to Back-end repo
               </a>
