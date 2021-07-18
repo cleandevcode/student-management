@@ -28,7 +28,7 @@ const App: React.FC = () => {
                 </Link>
               </li>
               <li className="nav-item">
-                <Link to={"/index"} className="nav-link">
+                <Link to={"/home"} className="nav-link">
                   Index
                 </Link>
               </li>
@@ -44,7 +44,7 @@ const App: React.FC = () => {
         <Switch>
           <Route exact path="/create" component={Create} />
           <Route path="/edit/:id" component={Edit} />
-          <Route path="/index" component={Index} />
+          <Route path="/home" component={Index} />
           <Route path="/wiki" component={Wiki} />
           <Route path="/" component={Home} />
         </Switch>

@@ -45,7 +45,7 @@ class Home extends React.Component<IProps, IState> {
               </a>
 
               <Link
-                to={"/index"}
+                to={"/home"}
                 className="btn btn-outline-secondary btn-lg px-4"
               >
                 Index

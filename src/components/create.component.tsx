@@ -61,7 +61,7 @@ export default class Create extends React.Component<IProps, IState> {
       BaseService.create<Person>("/students", this.state.person).then((rp) => {
         if (rp.status) {
           toastr.success("Member saved.");
-          window.location.href = "/index";
+          window.location.href = "/home";
         } else {
           toastr.error(rp.message);
         }
