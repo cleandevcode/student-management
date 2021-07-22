@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import Person from "../models/person";
 import BaseService from "../service/base.service";
 import * as toastr from "toastr";
+import { Button } from "antd";
 
 function Del(Id?: string) {
   BaseService.delete("/students/", Id).then((rp) => {
@@ -30,14 +31,14 @@ const TableRow: React.FunctionComponent<IProps> = (props) => {
       <td>{props.person.mobileNumber}</td>
       <td>{props.person.address}</td>
       <td className="text-right">
-        <Link to={"/edit/" + props.person.id} className="btn btn-primary">
-          Edit
-        </Link>
+        <Button type="primary">
+          <Link to={"/edit/" + props.person.id}>Edit</Link>
+        </Button>
       </td>
       <td className="text-left">
-        <button onClick={() => Del(props.person.id)} className="btn btn-danger">
+        <Button onClick={() => Del(props.person.id)} type="primary" danger>
           Delete
-        </button>
+        </Button>
       </td>
     </tr>
   );

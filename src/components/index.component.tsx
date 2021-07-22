@@ -4,7 +4,8 @@ import Person from "../models/person";
 import BaseService from "../service/base.service";
 import * as toastr from "toastr";
 import Loading from "../common/loading";
-import SortIcon from "../assets/sort-icon.png";
+import { Input } from "antd";
+import AntTable from "./antTable.component";
 
 interface IProps {}
 interface IState {
@@ -14,6 +15,7 @@ interface IState {
   hasError: Boolean;
   sorted: Boolean;
   searchKey: string;
+  loading: Boolean;
 }
 
 class Index extends React.Component<IProps, IState> {
@@ -24,6 +26,7 @@ class Index extends React.Component<IProps, IState> {
     hasError: false,
     sorted: false,
     searchKey: "",
+    loading: false,
   };
   constructor(props: IProps) {
     super(props);
@@ -34,6 +37,7 @@ class Index extends React.Component<IProps, IState> {
       hasError: false,
       sorted: false,
       searchKey: "",
+      loading: false,
     };
     this.onSorting = this.onSorting.bind(this);
     this.handleChange = this.handleChange.bind(this);
@@ -61,6 +65,7 @@ class Index extends React.Component<IProps, IState> {
   }
 
   loadData() {
+    this.setState({ loading: true });
     BaseService.getAll<Person>("/students").then((rp) => {
       if (rp.status) {
         const data = rp.data;
@@ -87,10 +92,10 @@ class Index extends React.Component<IProps, IState> {
             this.search(this.state.searchKey);
           }
         );
-        this.setState({ isReady: true });
+        this.setState({ isReady: true, loading: false });
       } else {
         this.setState({ isReady: true });
-        this.setState({ hasError: true });
+        this.setState({ hasError: true, loading: false });
         console.log("Messages: " + rp.message);
       }
     });
@@ -177,11 +182,11 @@ class Index extends React.Component<IProps, IState> {
   }
 
   public render(): React.ReactNode {
-    const { sorted, searchKey } = this.state;
+    const { searchKey } = this.state;
     return (
       <div>
         <div className="d-flex flex-end">
-          <input
+          <Input
             type="text"
             className="form-control mb-3"
             value={searchKey}
@@ -190,53 +195,7 @@ class Index extends React.Component<IProps, IState> {
           />
         </div>
         <h3 className="text-center">Persons List</h3>
-        <table className="table table-striped" style={{ marginTop: 20 }}>
-          <thead>
-            <tr>
-              <th>Index</th>
-              <th
-                className="pointer"
-                onClick={() => this.onSorting("firstName", sorted)}
-              >
-                First Name
-                <img src={SortIcon} alt="First name" width={12} />
-              </th>
-              <th
-                className="pointer"
-                onClick={() => this.onSorting("lastName", sorted)}
-              >
-                Last Name
-                <img src={SortIcon} alt="First name" width={12} />
-              </th>
-              <th
-                className="pointer"
-                onClick={() => this.onSorting("email", sorted)}
-              >
-                Email
-                <img src={SortIcon} alt="First name" width={12} />
-              </th>
-              <th
-                className="pointer"
-                onClick={() => this.onSorting("mobileNumber", sorted)}
-              >
-                Mobile Number
-                <img src={SortIcon} alt="First name" width={12} />
-              </th>
-              <th
-                className="pointer"
-                onClick={() => this.onSorting("address", sorted)}
-              >
-                Address
-                <img src={SortIcon} alt="First name" width={12} />
-              </th>
-
-              <th className="text-center" colSpan={2}>
-                Action
-              </th>
-            </tr>
-          </thead>
-          <tbody>{this.tabRow()}</tbody>
-        </table>
+        <AntTable data={this.state.listPersons} loading={this.state.loading} />
       </div>
     );
   }
