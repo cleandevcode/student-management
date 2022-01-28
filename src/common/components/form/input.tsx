@@ -1,4 +1,5 @@
 import * as React from "react";
+import { Input } from "antd";
 
 interface Props {
   name: string;
@@ -10,12 +11,12 @@ interface Props {
   submitted: boolean;
 }
 
-export const Input: React.FunctionComponent<Props> = (props) => {
+export const CustomInput: React.FunctionComponent<Props> = (props) => {
   return (
     <div className={formatWrapperClass(props)}>
       <label htmlFor={props.name}>{props.label}</label>
       <div className="field">
-        <input
+        <Input
           type="text"
           name={props.name}
           className="form-control"

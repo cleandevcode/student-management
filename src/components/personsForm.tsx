@@ -1,7 +1,7 @@
 import * as React from "react";
 import Person from "../models/person";
 
-import { Input, Button } from "../common/components/form";
+import { CustomInput, AntButton } from "../common/components/form";
 
 interface Props {
   person: Person;
@@ -23,7 +23,7 @@ export const PersonForm: React.FunctionComponent<Props> = (props) => {
     <form>
       <h1>Manage member</h1>
 
-      <Input
+      <CustomInput
         name="firstName"
         label="First Name"
         value={props.person.firstName}
@@ -31,7 +31,7 @@ export const PersonForm: React.FunctionComponent<Props> = (props) => {
         submitted={submitted}
       />
 
-      <Input
+      <CustomInput
         name="lastName"
         label="Last Name"
         value={props.person.lastName}
@@ -39,7 +39,7 @@ export const PersonForm: React.FunctionComponent<Props> = (props) => {
         submitted={submitted}
       />
 
-      <Input
+      <CustomInput
         name="email"
         label="Email"
         value={props.person.email}
@@ -47,7 +47,7 @@ export const PersonForm: React.FunctionComponent<Props> = (props) => {
         submitted={submitted}
       />
 
-      <Input
+      <CustomInput
         name="mobileNumber"
         label="Mobile Number"
         value={props.person.mobileNumber}
@@ -55,7 +55,7 @@ export const PersonForm: React.FunctionComponent<Props> = (props) => {
         submitted={submitted}
       />
 
-      <Input
+      <CustomInput
         name="address"
         label="Address"
         value={props.person.address}
@@ -71,7 +71,7 @@ export const PersonForm: React.FunctionComponent<Props> = (props) => {
         submitted={submitted}
       /> */}
 
-      <Button
+      <AntButton
         label="Save"
         className="btn btn-success mt-2"
         onClick={handleSave}

@@ -1,6 +1,7 @@
 import React from "react";
 import Loading from "../common/loading";
 import { IWikiResponse, IWikiQuery } from "../models/wiki";
+import { Input, Button } from "antd";
 
 interface IProps {}
 
@@ -25,6 +26,12 @@ export default class Wiki extends React.Component<IProps, IState> {
 
   handleChangeQuery(event: React.ChangeEvent<HTMLInputElement>) {
     this.setState({ query: event.target.value });
+  }
+
+  handleKeypress(event: React.KeyboardEvent<HTMLInputElement>) {
+    if (event.key === "Enter") {
+      this.handleSearch();
+    }
   }
 
   handleShowWiki(pageId: number) {
@@ -61,26 +68,27 @@ export default class Wiki extends React.Component<IProps, IState> {
     const { query, loading, pages } = this.state;
     return (
       <div className="form-group mb-3">
-        <h3>See the query result on Wiki by query</h3>
+        <h3>See the results of Wiki by query</h3>
         <label htmlFor="query"></label>
         <div className="field">
-          <input
+          <Input
             type="text"
             name="query"
             className="form-control"
             placeholder="Enter the query"
             value={query}
             onChange={this.handleChangeQuery.bind(this)}
+            onKeyPress={this.handleKeypress.bind(this)}
           />
         </div>
         <div className="mt-3 text-right">
-          <button
-            className="btn btn-primary"
+          <Button
+            type="primary"
             onClick={this.handleSearch.bind(this)}
             disabled={query.length === 0}
           >
             Search
-          </button>
+          </Button>
         </div>
         <div className="col-12 text-center mt-3">
           {loading && <Loading />}

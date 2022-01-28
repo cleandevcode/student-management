@@ -1,4 +1,5 @@
-import * as React from 'react';
+import * as React from "react";
+import { Button } from "antd";
 
 interface Props {
   label: string;
@@ -6,14 +7,10 @@ interface Props {
   onClick: () => void;
 }
 
-export const Button: React.FunctionComponent<Props> = (props) => {
-
+export const AntButton: React.FunctionComponent<Props> = (props) => {
   return (
-    <button type="button"
-      className={props.className}
-      onClick={props.onClick}
-    >
+    <Button className={props.className} type="primary" onClick={props.onClick}>
       {props.label}
-    </button>
+    </Button>
   );
 };
